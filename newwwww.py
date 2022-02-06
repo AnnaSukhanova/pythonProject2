@@ -41,8 +41,8 @@ def image():
 
 
 @app.route('/promotion_image')
-def promotion():
-    return """<!doctype html>
+def promotion_image():
+    return f"""<!doctype html>
                 <html lang="en">
                   <head>
                     <meta charset="utf-8">
