@@ -35,6 +35,7 @@ def image():
                   <body>
                     <h1>Жди нас, Марс</h1>
                     <img src={url_for('static', filename='mars.jpg')} alt="должен был быть Марс">
+                    <p>Вот она какая, красная планета.<\p>
                   </body>
                 </html>"""
 
