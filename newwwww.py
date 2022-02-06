@@ -34,8 +34,8 @@ def image():
                   </head>
                   <body>
                     <h1>Жди нас, Марс</h1>
-                    <img src={url_for('static', filename='mars.jpg')} alt="должен был быть Марс">
-                    <p>Вот она какая, красная планета.<\p>
+                    <img src={url_for('static', filename='img/mars.png')} alt="должен был быть Марс">
+                    <p>Вот она какая, красная планета.</p>
                   </body>
                 </html>"""
 
