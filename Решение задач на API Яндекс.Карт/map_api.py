@@ -1,9 +1,11 @@
 import os
 import sys
 
+sys.excepthook = lambda *a: sys.__excepthook__(*a)
 import requests
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QMainWindow
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic
 
 
@@ -12,6 +14,7 @@ class MyWidget(QMainWindow):
         super().__init__()
         uic.loadUi('map_api.ui', self)
         self.x, self.y, self.m, self.l = '37.530887', '55.70311', '0.002', 'map'
+        self.image.installEventFilter(self)
         self.getImage()
         self.initUI()
 
@@ -28,7 +31,23 @@ class MyWidget(QMainWindow):
         with open(self.map_file, "wb") as file:
             file.write(response.content)
 
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_PageUp:
+            if float(self.m) + 0.01 >= 17:
+                print('предел')
+            else:
+                self.m = float(self.m) + 0.01
+                self.initUI()
+
+        if event.key() == Qt.Key_PageDown:
+            if float(self.m) - 0.01 < 0:
+                print('предел')
+            else:
+                self.m = float(self.m) - 0.01
+                self.initUI()
+
     def initUI(self):
+        self.getImage()
         self.pixmap = QPixmap(self.map_file)
         self.image.setPixmap(self.pixmap)
 
